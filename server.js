@@ -5,7 +5,7 @@ var express  = require('express'),
     expressValidator = require('express-validator');
 
 
-/*Set EJS template Engine*/
+/*Set EJS template Engine*/ 
 app.set('views','./views');
 app.set('view engine','ejs');
 
