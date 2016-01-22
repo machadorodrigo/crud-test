@@ -166,9 +166,9 @@ curut2.put(function(req,res,next){
     var user_id = req.params.user_id;
 
     //validation
-    req.assert('name','Name is required').notEmpty();
-    req.assert('email','A valid email is required').isEmail();
-    req.assert('password','Enter a password 6 - 20').len(6,20);
+    req.assert('name','O nome é obrigatório').notEmpty();
+    req.assert('email','É necessário um e-mail válido').isEmail();
+    req.assert('password','Informe uma senha de 6 a 20 caracteres').len(6,20);
 
     var errors = req.validationErrors();
     if(errors){

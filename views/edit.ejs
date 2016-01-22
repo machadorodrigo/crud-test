@@ -3,7 +3,6 @@
     <head>
         <title><%=title%></title>
         <link rel="stylesheet" type="text/css" href="/../css/fluig-style-guide.min.css">
-        <link rel="stylesheet" href="/../css/style.css">
 		<script src="/../js/jquery.js"></script>
 		<script src="/../js/jquery-ui.min.js"></script>
 		<script src="/../js/mustache-min.js"></script>
@@ -36,7 +35,7 @@
 			</div>
 		</div>
 		<div class="err-area">
-		<div>
+		</div>
 	</form>
 </div>
  <script>
@@ -59,8 +58,8 @@
 
                         err += '<li>' + item.msg + '</li>';
                     });
-                    $(".err-area").html(err);
 					loading.hide();
+                    FLUIGC.toast({title:"Atenção", message: err, type: "danger"});
                     return false;
                 }
             });
