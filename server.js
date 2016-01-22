@@ -60,16 +60,16 @@ curut.get(function(req,res,next){
 
     req.getConnection(function(err,conn){
 
-        if (err) return next("Cannot Connect");
+        if (err) return next("Impossível conectar");
 
         var query = conn.query('SELECT * FROM t_user',function(err,rows){
 
             if(err){
                 console.log(err);
-                return next("Mysql error, check your query");
+                return next("Erro MySql. Verifique sua query");
             }
 
-            res.render('user',{title:"RESTful Crud Example",data:rows});
+            res.render('user',{title:"RESTful Crud Exemplo",data:rows});
 
          });
 
@@ -80,9 +80,9 @@ curut.get(function(req,res,next){
 curut.post(function(req,res,next){
 
     //validation
-    req.assert('name','Name is required').notEmpty();
-    req.assert('email','A valid email is required').isEmail();
-    req.assert('password','Enter a password 6 - 20').len(6,20);
+    req.assert('name','Nome é obrigatório').notEmpty();
+    req.assert('email','É necessário informar um e-mail válido').isEmail();
+    req.assert('password','Informe uma senha de 6 a 20 caracteres').len(6,20);
 
     var errors = req.validationErrors();
     if(errors){
@@ -100,13 +100,13 @@ curut.post(function(req,res,next){
     //inserting into mysql
     req.getConnection(function (err, conn){
 
-        if (err) return next("Cannot Connect");
+        if (err) return next("Impossível conectar");
 
         var query = conn.query("INSERT INTO t_user set ? ",data, function(err, rows){
 
            if(err){
                 console.log(err);
-                return next("Mysql error, check your query");
+                return next("Erro MySql. Verifique sua query");
            }
 
           res.sendStatus(200);
@@ -141,20 +141,20 @@ curut2.get(function(req,res,next){
 
     req.getConnection(function(err,conn){
 
-        if (err) return next("Cannot Connect");
+        if (err) return next("Impossível conectar");
 
         var query = conn.query("SELECT * FROM t_user WHERE user_id = ? ",[user_id],function(err,rows){
 
             if(err){
                 console.log(err);
-                return next("Mysql error, check your query");
+                return next("Erro MySql. Verifique sua query");
             }
 
             //if user not found
             if(rows.length < 1)
                 return res.send("User Not found");
 
-            res.render('edit',{title:"Edit user",data:rows});
+            res.render('edit',{title:"Editar usuário",data:rows});
         });
 
     });
@@ -186,15 +186,15 @@ curut2.put(function(req,res,next){
     //inserting into mysql
     req.getConnection(function (err, conn){
 
-        if (err) return next("Cannot Connect");
+        if (err) return next("Impossível conectar");
 
         var query = conn.query("UPDATE t_user set ? WHERE user_id = ? ",[data,user_id], function(err, rows){
 
            if(err){
                 console.log(err);
-                return next("Mysql error, check your query");
+                return next("Erro MySql. Verifique sua query");
            }
-
+			
           res.sendStatus(200);
 
         });
@@ -210,13 +210,13 @@ curut2.delete(function(req,res,next){
 
      req.getConnection(function (err, conn) {
 
-        if (err) return next("Cannot Connect");
+        if (err) return next("Impossível conectar");
 
         var query = conn.query("DELETE FROM t_user  WHERE user_id = ? ",[user_id], function(err, rows){
 
              if(err){
                 console.log(err);
-                return next("Mysql error, check your query");
+                return next("Erro MySql. Verifique sua query");
              }
 
              res.sendStatus(200);
